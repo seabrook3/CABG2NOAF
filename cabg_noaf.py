@@ -57,6 +57,23 @@ def web_app():
             shap_values = explainer.shap_values(df_subject)
             shap.force_plot(explainer.expected_value, shap_values[0, :], df_subject.iloc[0, :], matplotlib=True)
             st.pyplot(plt.gcf())
+            
+            with st.expander("Guidelines and Precautions"):
+                st.markdown("""
+                **Target population:**  
+                The tool is designed to assist clinicians in evaluating the risk of NOAF among adult patients undergoing CABG surgery and admitted to the ICU.  
+
+                **Input requirements:**  
+                Input variables (blood glucose, systolic blood pressure, PO₂, hemoglobin, and BUN) should be derived from clinical data within the first 24 hours of ICU admission, using the recommended units.  
+
+                **Result interpretation:**  
+                The tool outputs a probability value (0–100%), representing the estimated risk of NOAF. This should be used as supportive information in comprehensive clinical evaluation, rather than as a stand-alone diagnostic criterion. The risk threshold for clinical action should be determined at the physician’s discretion.  
+
+                **Precautions:**  
+                1. The model cannot replace clinical expertise; results must be interpreted together with full clinical assessment and other diagnostic information.  
+                2. Potential unmeasured confounders exist, as outlined in the study limitations, and results should be interpreted with caution.  
+                3. The tool is intended for risk stratification and early preventive discussions, not as the sole basis for treatment decisions.  
+                """)
 
     st.markdown(f"""
         <div class='all'>
