@@ -57,8 +57,9 @@ def web_app():
             shap_values = explainer.shap_values(df_subject)
             shap.force_plot(explainer.expected_value, shap_values[0, :], df_subject.iloc[0, :], matplotlib=True)
             st.pyplot(plt.gcf())
-            
-            st.expander("Guidelines and Precautions"):
+
+            # Guidelines and precautions
+            with st.expander("Guidelines and Precautions"):
                 st.markdown("""
                 **Target population:**  
                 The tool is designed to assist clinicians in evaluating the risk of NOAF among adult patients undergoing CABG surgery and admitted to the ICU.  
@@ -95,9 +96,6 @@ def web_app():
         PO2 = st.number_input("PO2 (mmHg)", min_value=100, max_value=600, value=230)
         BUN = st.number_input("Blood Urea Nitrogen (mg/dL)", min_value=1, max_value=80, value=25)
     Beta_blocker = st.slider("β-blocker (0: No, 1: Yes)", min_value=0, max_value=1, value=1)
-    # Beta_blocker = st.selectbox("β-blocker", options=[0, 1], index=0)
-    # Beta_blocker = st.radio("Beta blocker", options=['No', 'Yes'], index=0)
-    # Beta_blocker = 1 if Beta_blocker == 'Yes' else 0
 
     if st.button(label="Submit"):
         try:
@@ -106,7 +104,6 @@ def web_app():
                 st.error("Invalid SHR calculation. Please check your glucose and HbA1c values.")
             else:
                 SHR = round(SHR, 2)
-                # st.write(f"Calculated SHR: {SHR}")
                 user = Subject(SHR, Age, BMI, SBP, Hemoglobin, BUN, PO2, Beta_blocker)
                 user.make_predict()
         except Exception as e:
