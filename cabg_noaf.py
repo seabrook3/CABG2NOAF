@@ -58,7 +58,6 @@ def web_app():
             shap.force_plot(explainer.expected_value, shap_values[0, :], df_subject.iloc[0, :], matplotlib=True)
             st.pyplot(plt.gcf())
 
-            # Guidelines and precautions
             with st.expander("Guidelines and Precautions"):
                 st.markdown("""
                 **Target population:**  
