@@ -58,7 +58,7 @@ def web_app():
             shap.force_plot(explainer.expected_value, shap_values[0, :], df_subject.iloc[0, :], matplotlib=True)
             st.pyplot(plt.gcf())
             
-            with st.expander("Guidelines and Precautions"):
+            st.expander("Guidelines and Precautions"):
                 st.markdown("""
                 **Target population:**  
                 The tool is designed to assist clinicians in evaluating the risk of NOAF among adult patients undergoing CABG surgery and admitted to the ICU.  
